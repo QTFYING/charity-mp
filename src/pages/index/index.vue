@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { useToast } from 'wot-design-uni';
 import NavBar from '@/components/nav-bar/nav-bar.vue';
 import TabBar from '@/components/tab-bar/tab-bar.vue';
 
 definePage({
-  name: 'Home',
+  name: 'Index',
   title: '首页',
   style: {
     navigationBarTitleText: '首页',
@@ -15,10 +16,13 @@ definePage({
   tabBar: {
     index: 0,
   },
-  type: 'home',
+  type: 'index',
 });
 
 const router = useRouter();
+const { show: showToast } = useToast();
+const hasMessage = ref(true); // 有消息时为 true
+
 const title = ref('一个“功能”和“开发体验”优先的 uniapp 的模板');
 
 const textArray = ref([
@@ -31,12 +35,6 @@ const textArray = ref([
 ]);
 
 const proxy = getCurrentInstance()?.proxy;
-// 如果需要等待全局逻辑执行完毕后，则必须等待 proxy?.$appLaunchedPromise，其他生命周期也是如此
-onLoad(async () => {
-  // 在此处可以与全局逻辑并行执行
-  await proxy?.$appLaunchedPromise;
-  // app中初始化加载逻辑执行完成
-});
 
 function toListPage() {
   router.push({
@@ -65,6 +63,23 @@ function handleWebview() {
   });
 }
 
+// 扫码图标点击逻辑
+function onScanClick() {
+  showToast('启动扫描');
+}
+
+// 聊天图标点击逻辑
+function onChatClick() {
+  showToast('去消息中心');
+}
+
+// 如果需要等待全局逻辑执行完毕后，则必须等待 proxy?.$appLaunchedPromise，其他生命周期也是如此
+onLoad(async () => {
+  // 在此处可以与全局逻辑并行执行
+  await proxy?.$appLaunchedPromise;
+  // app中初始化加载逻辑执行完成
+});
+
 onMounted(() => {
   // #ifdef H5
   // TODO: 预加载h5页面，h5可以预加载，记得删掉
@@ -83,8 +98,16 @@ onMounted(() => {
 
 <template>
   <view class="w-full">
-    <NavBar title="标题" left-text="" :left-arrow="false" right-text="111" :fixed="true">
-      <wd-icon name="search" size="18" />
+    <NavBar left-text="" :left-arrow="false" right-text="111" :fixed="true">
+      首页
+      <template #right>
+        <wd-icon name="scan" size="20x" color="#34D19D" class="icon-gap" @click="onScanClick" />
+
+        <view class="icon-dot-wrap">
+          <wd-icon name="chat" size="20px" color="#34D19D" @click="onChatClick" />
+          <view v-if="hasMessage" class="icon-dot" />
+        </view>
+      </template>
     </NavBar>
 
     <wd-notice-bar
@@ -135,5 +158,25 @@ onMounted(() => {
 <style lang="postcss" scoped>
 .logo {
   @apply mb-10 mx-auto h-200 w-200 mt-[200rpx];
+}
+
+.icon-dot-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-dot {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: #ff3b30;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.icon-gap {
+  margin-right: 12px;
 }
 </style>

@@ -1,6 +1,6 @@
-# uniapp-template
+# charity-mp
 
-一个注重"功能"和"开发体验"的 uniapp 模板。
+中慈消费捐项目，该项目主要是微信小程序和H5。
 
 ## 🛠️ 技术栈
 
@@ -159,13 +159,3 @@ pnpm build
 ├── uno.config.ts # UnoCSS 配置
 └── vite.config.ts # Vite 配置
 ```
-
-在我印象中最理想的 uniapp 组件库 应该是 radix、shadcn/ui、origin ui 那样的组件库，希望有人能实现一个🙏。
-
-## 🤝 贡献
-
-欢迎提交 [Issue](https://github.com/zhe-qi/uniapp-template/issues) 和 PR！
-
-## 📄 开源协议
-
-MIT License © 2024 [zhe-qi](https://github.com/zhe-qi)

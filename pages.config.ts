@@ -21,7 +21,7 @@ export default defineUniPages({
     selectedColor: '#000',
     list: [
       {
-        pagePath: 'pages/home/home',
+        pagePath: 'pages/index/index',
         text: '首页',
       },
       {

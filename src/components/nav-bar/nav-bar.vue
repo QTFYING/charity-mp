@@ -44,5 +44,11 @@ function handleClickLeft() {
     <template #title>
       <slot />
     </template>
+    <template #right>
+      <slot name="right" />
+    </template>
+    <template #left>
+      <slot name="left" />
+    </template>
   </wd-navbar>
 </template>
