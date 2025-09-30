@@ -12,7 +12,8 @@ type _LocationUrl =
   "/pages/theme/theme" |
   "/pages/webview/webview" |
   "/pages/welfare/welfare" |
-  "/pages-sub/list/list";
+  "/pages-sub/list/list" |
+  "/pages-sub/message/message";
 
 interface NavigateToOptions {
   url: _LocationUrl;

@@ -16,7 +16,7 @@
     },
     {
       "path": "pages/discover/discover",
-      "type": "page",
+      "type": "discover",
       "name": "Discover",
       "title": "发现",
       "style": {
@@ -167,6 +167,19 @@
           "title": "列表",
           "style": {
             "navigationBarTitleText": "列表",
+            "navigationStyle": "custom"
+          },
+          "meta": {
+            "ignoreAuth": true
+          }
+        },
+        {
+          "path": "message/message",
+          "type": "page",
+          "name": "Message",
+          "title": "消息中心",
+          "style": {
+            "navigationBarTitleText": "消息中心",
             "navigationStyle": "custom"
           },
           "meta": {

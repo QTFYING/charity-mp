@@ -2,6 +2,7 @@
 import { useToast } from 'wot-design-uni';
 import NavBar from '@/components/nav-bar/nav-bar.vue';
 import TabBar from '@/components/tab-bar/tab-bar.vue';
+import { formatDate } from '@/utils/utility/utils';
 
 definePage({
   name: 'Index',
@@ -23,54 +24,16 @@ const router = useRouter();
 const { show: showToast } = useToast();
 const hasMessage = ref(true); // 有消息时为 true
 
-const title = ref('一个“功能”和“开发体验”优先的 uniapp 的模板');
-
 const textArray = ref([
-  '欢迎使用wot design uni',
-  '该组件库基于uniapp ->Vue3, ts构建',
-  '项目地址：https://github.com/Moonofweisheng/wot-design-uni',
-  '我们的目标是打造最强uniapp组件库',
-  '诚挚邀请大家共同建设',
-  '这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息，这是一条消息提示信息',
+  `张先生通过公益项目捐款12.62元 ${formatDate(new Date().getTime())}`,
+  `李先生通过公益项目捐款5.60元 ${formatDate(new Date().getTime())}`,
 ]);
 
 const proxy = getCurrentInstance()?.proxy;
 
-function toListPage() {
-  router.push({
-    name: 'List',
-    params: {
-      title: 'List',
-    },
-  });
-}
-
-function handleWebview() {
-  const url = `https://www.baidu.com/s?wd=uniez-template&_t=${Date.now()}`;
-  let title = '我是h5标题';
-
-  // #ifdef MP-WEIXIN
-  // 小程序使用h5的标题
-  title = '加载中...';
-  // #endif
-
-  router.push({
-    name: 'Webview',
-    params: {
-      title,
-      url: encodeURIComponent(url),
-    },
-  });
-}
-
 // 扫码图标点击逻辑
 function onScanClick() {
   showToast('启动扫描');
-}
-
-// 聊天图标点击逻辑
-function onChatClick() {
-  showToast('去消息中心');
 }
 
 // 如果需要等待全局逻辑执行完毕后，则必须等待 proxy?.$appLaunchedPromise，其他生命周期也是如此
@@ -81,74 +44,77 @@ onLoad(async () => {
 });
 
 onMounted(() => {
-  // #ifdef H5
-  // TODO: 预加载h5页面，h5可以预加载，记得删掉
-  uni.preloadPage({
-    url: '/pages-sub/list/list',
-  });
-  uni.preloadPage({
-    url: '/pages/test-page/test-page',
-  });
-  uni.preloadPage({
-    url: '/pages/theme/theme',
-  });
-  // #endif
+
 });
 </script>
 
 <template>
   <view class="w-full">
     <NavBar left-text="" :left-arrow="false" right-text="111" :fixed="true">
-      首页
+      十世守善公益平台
       <template #right>
-        <wd-icon name="scan" size="20x" color="#34D19D" class="icon-gap" @click="onScanClick" />
+        <wd-icon name="scan" size="18px" color="#34D19D" class="mr-3" @click="onScanClick" />
 
-        <view class="icon-dot-wrap">
-          <wd-icon name="chat" size="20px" color="#34D19D" @click="onChatClick" />
-          <view v-if="hasMessage" class="icon-dot" />
+        <view class="relative inline-block">
+          <wd-icon name="chat" size="20px" color="#34D19D" @click="router.push({ name: 'Message' })" />
+          <view v-if="hasMessage" class="absolute right-0 top-20rpx h-8px w-8px border-2 border-white rounded-full bg-red-500" />
         </view>
       </template>
     </NavBar>
 
     <wd-notice-bar
+      :delay="3"
       color="#34D19D"
       direction="vertical"
       background-color="#f0f9eb"
-      :delay="3"
       custom-class="space"
       :text="textArray"
     />
 
+    <view class="m-20rpx rounded-10rpx from-#22c55e to-#15b9a2 bg-gradient-to-b p-20rpx">
+      <view class="user-info__first__line flex items-center justify-between gap-4">
+        <view class="flex items-center gap-4">
+          <view>头像</view>
+          <view>
+            <view>爱心用户</view>
+            <view>爱心积分</view>
+          </view>
+        </view>
+        <view>爱心大使Lv.5</view>
+      </view>
+
+      <view class="user-info__second__line">
+        <view>
+          <text>24</text>
+          <text>捐赠次数</text>
+        </view>
+
+        <view>
+          <text>￥568</text>
+          <text>累计金额</text>
+        </view>
+
+        <view>
+          <text>226</text>
+          <text>帮助人数</text>
+        </view>
+      </view>
+    </view>
+
     <view class="mt-12 flex flex-center flex-col">
-      <wd-img class="logo" src="/static/logo.png" width="200rpx" height="200rpx" />
       <!-- 测试模板全局方法，鼠标移入可以显示其类型 -->
       <text class="mt-4">
         {{ $formatDate(new Date().getTime()) }}
       </text>
     </view>
+
     <view class="flex justify-center">
       <text class="title mt-4 text-primary font-500">
-        {{ title }}
+        13213
       </text>
     </view>
 
-    <view class="mt-8 flex flex-col gap-4 px-4">
-      <wd-button @click="toListPage">
-        跳转分包页面
-      </wd-button>
-
-      <wd-button @click="router.push({ name: 'TestPage' })">
-        跳转测试 component is 页面
-      </wd-button>
-
-      <wd-button @click="router.push({ name: 'Theme' })">
-        跳转测试动态主题测试页面
-      </wd-button>
-
-      <wd-button @click="handleWebview">
-        跳转测试webview页面
-      </wd-button>
-    </view>
+    <view class="mt-8 flex flex-col gap-4 px-4" />
 
     <TabBar :index="0" />
   </view>
@@ -156,27 +122,5 @@ onMounted(() => {
 
 <!-- 关于为什么使用 postcss 而不是scss，因为 scss 使用 @apply 爆警告，如果你能做到无视警告，请使用scss -->
 <style lang="postcss" scoped>
-.logo {
-  @apply mb-10 mx-auto h-200 w-200 mt-[200rpx];
-}
 
-.icon-dot-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-.icon-dot {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  background: #ff3b30;
-  border-radius: 50%;
-  border: 2px solid #fff;
-}
-
-.icon-gap {
-  margin-right: 12px;
-}
 </style>
