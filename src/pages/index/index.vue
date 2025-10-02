@@ -71,31 +71,45 @@ onMounted(() => {
       :text="textArray"
     />
 
-    <view class="m-20rpx rounded-10rpx from-#22c55e to-#15b9a2 bg-gradient-to-b p-20rpx">
-      <view class="user-info__first__line flex items-center justify-between gap-4">
-        <view class="flex items-center gap-4">
-          <view>头像</view>
-          <view>
-            <view>爱心用户</view>
-            <view>爱心积分</view>
+    <view class="m-20rpx rounded-20rpx from-#22c55e to-#15b9a2 bg-gradient-to-b p-20rpx">
+      <view class="flex justify-between gap-4">
+        <view class="flex gap-4">
+          <wd-img round :width="60" :height="60" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
+
+          <view class="flex flex-col">
+            <text class="text-30rpx text-white">
+              爱心用户
+            </text>
+            <text class="mt-10rpx text-24rpx text-white">
+              爱心积分：1280
+            </text>
           </view>
         </view>
-        <view>爱心大使Lv.5</view>
+
+        <view class="flex gap-4 text-white">
+          <text>爱心大使Lv.5</text>
+        </view>
       </view>
 
-      <view class="user-info__second__line">
-        <view>
-          <text>24</text>
+      <view class="mt-5 flex justify-between text-white">
+        <view class="flex flex-col items-center gap-2 text-28rpx">
+          <text class="text-48rpx font-500">
+            24
+          </text>
           <text>捐赠次数</text>
         </view>
 
-        <view>
-          <text>￥568</text>
+        <view class="flex flex-col items-center gap-2 text-28rpx">
+          <text class="text-48rpx font-500">
+            ￥568
+          </text>
           <text>累计金额</text>
         </view>
 
-        <view>
-          <text>226</text>
+        <view class="flex flex-col items-center gap-2 text-28rpx">
+          <text class="text-48rpx font-500">
+            226
+          </text>
           <text>帮助人数</text>
         </view>
       </view>
