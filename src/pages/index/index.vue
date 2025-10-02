@@ -115,6 +115,27 @@ onMounted(() => {
       </view>
     </view>
 
+    <wd-card>
+      <wd-grid clickable>
+        <wd-grid-item>
+          <text class="i-lucide-heart-crack text-100" />
+          <text>公益项目</text>
+        </wd-grid-item>
+        <wd-grid-item>
+          <text class="i-lucide-baggage-claim text-100" />
+          <text>消费捐赠</text>
+        </wd-grid-item>
+        <wd-grid-item>
+          <text class="i-lucide-book-open text-100" />
+          <text>科普天地</text>
+        </wd-grid-item>
+        <wd-grid-item>
+          <text class="i-lucide-cherry text-100" />
+          <text>公益活动</text>
+        </wd-grid-item>
+      </wd-grid>
+    </wd-card>
+
     <view class="mt-12 flex flex-center flex-col">
       <!-- 测试模板全局方法，鼠标移入可以显示其类型 -->
       <text class="mt-4">
@@ -136,5 +157,11 @@ onMounted(() => {
 
 <!-- 关于为什么使用 postcss 而不是scss，因为 scss 使用 @apply 爆警告，如果你能做到无视警告，请使用scss -->
 <style lang="postcss" scoped>
-
+:deep(.custom-item) {
+  height: 80px !important;
+  color: #e2231a;
+  padding-left: 20px;
+  background-color: #e2231a;
+  text-align: left !important;
+}
 </style>
